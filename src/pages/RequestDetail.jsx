@@ -204,7 +204,7 @@ export default function RequestDetail() {
   const track = request.track || [];
   const userRoles = [user?.user_type, ...(user?.roles || [])];
   const canApprove = (String(request.active_approver_emp_no) === String(user?.emp_no) || userRoles.includes(request.active_approver)) && ['Pending','Initiated'].includes(request.status);
-  const isAdmin = ['admin', 'superadmin'].includes(user?.user_type) || user?.roles?.some(r => ['admin', 'superadmin'].includes(r));
+  const isAdmin = ['admin', 'superadmin', 'super_admin'].includes(user?.user_type) || user?.roles?.some(r => ['admin', 'superadmin', 'super_admin'].includes(r));
   const canDelete = request.status !== 'Approved' && (String(request.emp_no) === String(user?.emp_no) || isAdmin);
   
   const isITAsset = request?.asset_group_name?.toUpperCase().includes('IT') || request?.asset_type_display?.toUpperCase().includes('IT');

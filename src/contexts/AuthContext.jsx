@@ -158,14 +158,17 @@ export function AuthProvider({ children }) {
   // These are thin wrappers that read from the user object,
   // centralising role-check logic for use throughout the UI.
 
+  const SA_ROLES = ['superadmin', 'super_admin'];
+  const ADMIN_ROLES = ['admin', 'superadmin', 'super_admin'];
+
   /** @returns {boolean} True if the user is a superadmin */
   const isSuperAdmin = () =>
-    user?.user_type === 'superadmin' || user?.roles?.includes('superadmin');
+    SA_ROLES.includes(user?.user_type) || user?.roles?.some(r => SA_ROLES.includes(r));
 
   /** @returns {boolean} True if the user is an admin or superadmin */
   const isAdmin = () =>
-    ['admin', 'superadmin'].includes(user?.user_type) ||
-    user?.roles?.some(r => ['admin', 'superadmin'].includes(r));
+    ADMIN_ROLES.includes(user?.user_type) ||
+    user?.roles?.some(r => ADMIN_ROLES.includes(r));
 
   /** @returns {boolean} True if the user is a CFO, admin, or superadmin */
   const isCFO = () => isAdmin() || user?.roles?.includes('cfo');
