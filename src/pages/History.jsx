@@ -61,7 +61,7 @@ export default function History() {
               {total} Historical Records
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--text-primary)', fontWeight: 700 }}>
-               ₹{Number(rows.reduce((s,r) => s + Number(r.amount_ext_gst||0), 0)).toLocaleString('en-IN')} Value
+               ₹{Number(rows.reduce((s,r) => s + Number(r.amount_ext_gst || r.approve_amount || 0), 0)).toLocaleString('en-IN')} Value
             </span>
           </p>
         </div>
@@ -130,7 +130,7 @@ export default function History() {
                       <div style={{ fontSize: '11px', color: 'var(--text-faint)' }}>Req: {r.requester_name}</div>
                     </td>
                     <td style={{ textAlign: 'right', fontWeight: 700 }}>
-                      ₹{Number(r.amount_ext_gst || 0).toLocaleString('en-IN')}
+                      ₹{Number(r.amount_ext_gst || r.approve_amount || 0).toLocaleString('en-IN')}
                     </td>
                     <td style={{ textAlign: 'center' }}>
                       <span className={`badge ${STATUS_CLASS[r.status] || 'badge-muted'}`} style={{ padding: '4px 12px', fontSize: '10px' }}>{r.status}</span>

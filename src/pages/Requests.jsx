@@ -105,7 +105,7 @@ export default function Requests({ defaultView = '' }) {
               {total} Requests Total
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px', color: 'var(--text-primary)', fontWeight: 700 }}>
-               ₹{Number(rows.reduce((s,r) => s + Number(r.amount_ext_gst||0), 0)).toLocaleString('en-IN')} Value
+               ₹{Number(rows.reduce((s,r) => s + Number(r.amount_ext_gst || r.approve_amount || 0), 0)).toLocaleString('en-IN')} Value
             </span>
             <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
               <span style={{ width: '8px', height: '8px', borderRadius: '50%', background: 'var(--amber)' }} />
@@ -233,7 +233,7 @@ export default function Requests({ defaultView = '' }) {
                       <span className={`badge ${r.request_type === 'CAPEX' ? 'badge-info' : r.request_type === 'BULK' ? 'badge-primary' : 'badge-teal'}`} style={{ fontSize: '10px' }}>{r.request_type}</span>
                     </td>
                     <td style={{ textAlign: 'right' }}>
-                      <div style={{ fontWeight: 800, fontSize: '14px' }}>₹{Number(r.amount_ext_gst || 0).toLocaleString('en-IN')}</div>
+                      <div style={{ fontWeight: 800, fontSize: '14px' }}>₹{Number(r.amount_ext_gst || r.approve_amount || 0).toLocaleString('en-IN')}</div>
                     </td>
                     <td style={{ textAlign: 'center' }}>
                       <span className={`badge ${STATUS_CLASS[r.status] || 'badge-muted'}`} style={{ padding: '4px 12px', fontSize: '10px' }}>{r.status}</span>
@@ -279,7 +279,7 @@ export default function Requests({ defaultView = '' }) {
                 <PackageCheck size={28} color="var(--teal)" />
                 <div>
                    <div style={{ fontSize: '14px', fontWeight: 700 }}>{selected.length} Records Selected</div>
-                   <div style={{ fontSize: '12px', color: 'var(--text-faint)' }}>Total value: ₹{Number(rows.filter(r => selected.includes(r.id)).reduce((s,r) => s + Number(r.amount_ext_gst||0), 0)).toLocaleString('en-IN')}</div>
+                   <div style={{ fontSize: '12px', color: 'var(--text-faint)' }}>Total value: ₹{Number(rows.filter(r => selected.includes(r.id)).reduce((s,r) => s + Number(r.amount_ext_gst || r.approve_amount || 0), 0)).toLocaleString('en-IN')}</div>
                 </div>
               </div>
               <div className="form-group">
