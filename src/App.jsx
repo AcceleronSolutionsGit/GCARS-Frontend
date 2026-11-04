@@ -88,7 +88,7 @@ export default function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
-        <BrowserRouter>
+        <BrowserRouter basename={import.meta.env.BASE_URL || '/gcars2'}>
           <NavigateRegistrar />
           <Toaster
             position="top-right"
