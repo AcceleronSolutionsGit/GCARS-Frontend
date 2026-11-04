@@ -125,9 +125,10 @@ export function AuthProvider({ children }) {
       }
       return { success: false, message: data.message };
     } catch (err) {
+      console.error('[Login Error]', err.response?.status, err.response?.data, err.message);
       return {
         success: false,
-        message: err.response?.data?.message || 'Login failed. Check your credentials.',
+        message: err.response?.data?.message || (err.message === 'Network Error' ? 'Cannot reach backend server. Check proxy/port.' : 'Login failed. Check your credentials.'),
       };
     } finally {
       setLoading(false);
