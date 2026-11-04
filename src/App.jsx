@@ -59,6 +59,7 @@ function AppRoutes() {
   return (
     <Routes>
       <Route path="/login" element={user ? <Navigate to="/dashboard" replace /> : <Login />} />
+      <Route path="login" element={user ? <Navigate to="/dashboard" replace /> : <Login />} />
       <Route path="/dashboard"    element={<PrivateRoute><Layout><Dashboard /></Layout></PrivateRoute>} />
       <Route path="/requests"     element={<PrivateRoute><Layout><Requests defaultView="my_requests" /></Layout></PrivateRoute>} />
       <Route path="/approvals"    element={<PrivateRoute><Layout><Requests defaultView="to_approve" /></Layout></PrivateRoute>} />
@@ -85,10 +86,13 @@ function AppRoutes() {
 }
 
 export default function App() {
+  const rawBase = import.meta.env.BASE_URL || '/gcars2';
+  const basename = rawBase.endsWith('/') && rawBase !== '/' ? rawBase.slice(0, -1) : rawBase;
+
   return (
     <ThemeProvider>
       <AuthProvider>
-        <BrowserRouter basename={import.meta.env.BASE_URL || '/gcars2'}>
+        <BrowserRouter basename={basename}>
           <NavigateRegistrar />
           <Toaster
             position="top-right"
