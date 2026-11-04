@@ -405,12 +405,17 @@ export default function RequestDetail() {
               <div style={{ marginTop: '24px', paddingBottom: '8px', borderBottom: '1px solid var(--border-2)' }}>
                 <div style={{ fontSize: '11px', fontWeight: 700, color: 'var(--text-muted)', textTransform: 'uppercase', marginBottom: '12px' }}>Supporting Documents & Quotations</div>
                 <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                  {request.quotation.split(';').filter(Boolean).map((file, idx) => (
-                    <a key={idx} href={`${import.meta.env.VITE_API_URL?.replace('/api', '') || 'http://localhost:5000'}/uploads/${file}`} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ border: '1px solid var(--border)', display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '8px 16px', borderRadius: '8px', fontSize: '13px' }}>
-                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-                      View Attachment {idx + 1}
-                    </a>
-                  ))}
+                  {request.quotation.split(';').filter(Boolean).map((file, idx) => {
+                    const uploadBase = import.meta.env.VITE_API_URL
+                      ? import.meta.env.VITE_API_URL.replace(/\/api\/?$/, '')
+                      : ((import.meta.env.BASE_URL || '/gcars2').replace(/\/+$/, ''));
+                    return (
+                      <a key={idx} href={`${uploadBase}/uploads/${file}`} target="_blank" rel="noreferrer" className="btn btn-ghost" style={{ border: '1px solid var(--border)', display: 'inline-flex', alignItems: 'center', gap: '8px', padding: '8px 16px', borderRadius: '8px', fontSize: '13px' }}>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+                        View Attachment {idx + 1}
+                      </a>
+                    );
+                  })}
                 </div>
               </div>
             )}

@@ -4,6 +4,7 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useState, useEffect } from 'react';
 import api from '../../api/client';
 import toast from 'react-hot-toast';
+import logoImg from '../../assets/logo.png';
 import { 
   LayoutDashboard, 
   FileText, 
@@ -163,7 +164,7 @@ export default function Layout({ children }) {
         {/* Logo */}
         <div className="sidebar-logo" style={{ padding: collapsed ? '16px 8px' : '16px 20px', minHeight: '68px', display: 'flex', alignItems: 'center', justifyContent: collapsed ? 'center' : 'flex-start' }}>
           <img 
-            src="/logo.png" 
+            src={logoImg} 
             alt="Gainwell" 
             style={{ 
               height: collapsed ? '28px' : '26px', 

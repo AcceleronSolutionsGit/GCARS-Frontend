@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import toast from 'react-hot-toast';
+import logoImg from '../assets/logo.png';
 
 export default function Login() {
   const [identifier, setIdentifier] = useState('');
@@ -96,7 +97,7 @@ export default function Login() {
           {/* Logo animation block */}
           <div className="animate-scale-in" style={{ position: 'relative', zIndex: 2 }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-              <img src="/logo.png" alt="Gainwell" style={{ height: '48px', objectFit: 'contain' }} />
+              <img src={logoImg} alt="Gainwell" style={{ height: '48px', objectFit: 'contain' }} />
               <div style={{
                 height: '24px',
                 width: '1px',
